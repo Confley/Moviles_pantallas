@@ -1,8 +1,5 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "../screens/HomeScreen";
-import Setting from "../screens/SettingScreen";
-import NewScreen from "../screens/NewScreen";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -24,7 +21,6 @@ import {
   Icon,
   Image,
 } from "native-base";
-import MenuButtonItem from "../components/MenuButtonItem";
 global.__reanimatedWorkletInit = () => {};
 const Drawer = createDrawerNavigator();
 
@@ -69,7 +65,6 @@ const styles = StyleSheet.create({
 });
 
 // TODO: YA CON MÁS MODIFICACIONES
-
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -176,65 +171,63 @@ function CustomDrawerContent(props) {
     </DrawerContentScrollView>
   );
 
-// TODO: ESTRUCTURA PEQUEÑA
-// const CustomDrawerContent = ({ navigation }) => {
+  // TODO: ESTRUCTURA PEQUEÑA
+  // const CustomDrawerContent = ({ navigation }) => {
 
-//   return (
-//     <DrawerContentScrollView style={styles.container}>
-//       {/*//? TITULO */}
-//       <Text style={styles.title}>Mi menú ^-^</Text>
+  //   return (
+  //     <DrawerContentScrollView style={styles.container}>
+  //       {/*//? TITULO */}
+  //       <Text style={styles.title}>Mi menú ^-^</Text>
 
-//       {/*//? ELEMENTOS */}
-//       <MenuButtonItem
-//         imagen={
-//           "https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg"
-//         }
-//         text="Home"
-//         onPress={() => navigation.navigate("Home")}
-//       />
-//       <MenuButtonItem
-//         imagen={
-//           "https://img.freepik.com/psd-gratis/caja-carton-aislada_125540-1169.jpg "
-//         }
-//         text="Component"
-//         onPress={() => navigation.navigate("Trash")}
-//       />
-//       <MenuButtonItem
-//         imagen={
-//           "https://http2.mlstatic.com/D_NQ_NP_683658-MLM42909780153_072020-W.jpg"
-//         }
-//         text="Setting"
-//         onPress={() => navigation.navigate("Setting")}
-//       />
-//     </DrawerContentScrollView>
-//   );
-
-};
-
-function MyDrawer() {
-  return (
-    // <Box safeArea flex={1}>
-    <Drawer.Navigator
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-    >
-      <Drawer.Screen name="Home"            component={Home} />
-      <Drawer.Screen name="Nueva pantalla"  component={NewScreen} />
-      <Drawer.Screen name="Favorites"       component={Component} />
-      <Drawer.Screen name="Archive"         component={Component} />
-      <Drawer.Screen name="Trash"           component={Component} />
-      <Drawer.Screen name="Setting"         component={Setting} />
-      <Drawer.Screen name="New"             component={NewScreen} />
-    </Drawer.Navigator>
-    // </Box>
-  );
+  //       {/*//? ELEMENTOS */}
+  //       <MenuButtonItem
+  //         imagen={
+  //           "https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg"
+  //         }
+  //         text="Home"
+  //         onPress={() => navigation.navigate("Home")}
+  //       />
+  //       <MenuButtonItem
+  //         imagen={
+  //           "https://img.freepik.com/psd-gratis/caja-carton-aislada_125540-1169.jpg "
+  //         }
+  //         text="Component"
+  //         onPress={() => navigation.navigate("Trash")}
+  //       />
+  //       <MenuButtonItem
+  //         imagen={
+  //           "https://http2.mlstatic.com/D_NQ_NP_683658-MLM42909780153_072020-W.jpg"
+  //         }
+  //         text="Setting"
+  //         onPress={() => navigation.navigate("Setting")}
+  //       />
+  //     </DrawerContentScrollView>
+  //   );
 }
 
-export default function Dnavigation() {
+// Todo. Importar las pantallas
+import Home from "../screens/HomeScreen";
+import NewScreen from "../screens/NewScreen";
+// import MenuButtonItem from "../components/MenuButtonItem"; //No sé que sea ni que haga xd
+import SobreNosotros from '../pnt_confley/SobreNosotros';
+import VisualizarAnuncios from '../pnt_confley/VisualizarAnuncios'
+import Categorias from '../pnt_ramon/Categorías'
+
+export default function MyDrawer() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <MyDrawer />
+        <Drawer.Navigator
+        // drawerContent={(props) => <CustomDrawerContent {...props} />}
+        >
+          <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="NewScreen" component={NewScreen} />
+          <Drawer.Screen name="Sobre Nosotros" component={SobreNosotros} />
+          <Drawer.Screen name="Ver Anuncios" component={VisualizarAnuncios} />
+          <Drawer.Screen name="Categorias" component={Categorias} />
+        </Drawer.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
   );
 }
+
