@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import DrawerNavigator from "./src/DrawerNavigator";
+import Dnavigation from "./src/navigation/DrawerNavigation";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Desués de 2 horas, al fin pude :´v</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  // return <DrawerNavigator />;
+  return <Dnavigation />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
