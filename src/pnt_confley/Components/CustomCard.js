@@ -47,8 +47,6 @@ const CustomCard = ({ title, description, buttonText, onButtonClick }) => {
   );
 };
 
-export default CustomCard;
-
 const styles = StyleSheet.create({
   card: {
     width: "auto", // Agrega un ancho mayor aquí
@@ -77,3 +75,5 @@ const styles = StyleSheet.create({
     color: "gray",
   },
 });
+
+export default CustomCard;

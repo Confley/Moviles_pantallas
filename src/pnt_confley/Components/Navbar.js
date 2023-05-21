@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, HStack, NativeBaseProvider, Text } from "native-base";
+import { Box, NativeBaseProvider, Text } from "native-base";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 const Navbar = ({ titulo }) => {
@@ -7,12 +7,9 @@ const Navbar = ({ titulo }) => {
     <NativeBaseProvider>
       <SafeAreaView>
         <Box style={styles.box} bg="blue.600">
-          <HStack style={styles.hStack_1}>
-            <Button style={{ backgroundColor: "green", marginRight: 10 }}>
-              Drawer
-            </Button>
+          
             <Text style={styles.textNavbar}>{titulo}</Text>
-          </HStack>
+          
         </Box>
       </SafeAreaView>
     </NativeBaseProvider>

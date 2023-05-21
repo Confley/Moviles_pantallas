@@ -1,10 +1,10 @@
 import React from "react";
-import Example from "./src/navigation/DrawerNavigation";
+import MyDrawer from "./src/navigation/DrawerNavigation";
 
 const App = () => {
   return (
     <>
-      <Example />
+      <MyDrawer />
     </>
   );
 };

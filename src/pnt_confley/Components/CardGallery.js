@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import { Box, Divider, Text } from "native-base";
+import { Box, Text } from "native-base";
 import CustomCard from "./CustomCard";
 
 const CardGallery = ({ title, items }) => {
@@ -27,8 +27,6 @@ const CardGallery = ({ title, items }) => {
   );
 };
 
-export default CardGallery;
-
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
@@ -47,3 +45,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
+
+export default CardGallery;
