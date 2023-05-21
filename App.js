@@ -1,18 +1,35 @@
-import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text, View } from "react-native";
-import DrawerNavigator from "./src/DrawerNavigator";
-import Dnavigation from "./src/navigation/DrawerNavigation";
+
+const Stack = createStackNavigator();
+
+import NewScreen from "./src/screens/NewScreen";
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="NewScreen" component={NewScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
-  // return <DrawerNavigator />;
-  return <Dnavigation />;
+  return (
+    <View style={styles.container}>
+      {/* <Text> hola </Text> */}
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "center", // horizontal
+    justifyContent: "center", // vertical
   },
 });
