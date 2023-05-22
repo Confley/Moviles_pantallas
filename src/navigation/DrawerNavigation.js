@@ -212,6 +212,7 @@ import NewScreen from "../screens/NewScreen";
 import SobreNosotros from '../pnt_confley/SobreNosotros';
 import VisualizarAnuncios from '../pnt_confley/VisualizarAnuncios'
 import Categorias from '../pnt_ramon/Categorías'
+import AgregarComunicado from "../pnt_confley/AgregarComunicado";
 
 export default function MyDrawer() {
   return (
@@ -220,6 +221,8 @@ export default function MyDrawer() {
         <Drawer.Navigator
         // drawerContent={(props) => <CustomDrawerContent {...props} />}
         >
+          <Drawer.Screen name="Nuevo Comunicado" component={AgregarComunicado} />
+          
           <Drawer.Screen name="Home" component={Home} />
           <Drawer.Screen name="NewScreen" component={NewScreen} />
           <Drawer.Screen name="Sobre Nosotros" component={SobreNosotros} />
