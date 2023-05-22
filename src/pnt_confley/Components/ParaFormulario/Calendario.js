@@ -55,7 +55,7 @@ LocaleConfig.locales["esp"] = {
 
 LocaleConfig.defaultLocale = "esp";
 
-const Calendario = () => {
+const Calendario = ({ metodo }) => {
   const [selected, setSelected] = useState("");
   const [dia, setDia] = useState("");
   const [mes, setMes] = useState("");
@@ -104,13 +104,17 @@ const Calendario = () => {
           />
         </View>
         <Text style={styles.baseText}>
-          Su cita será el {dia} del mes {mes} del {anio} a las {hora} : {minuto}
+          Fecha establecida: {dia + " / " + mes + " / " + anio + ", " + hora + ":" + minuto}
         </Text>
         <Button
           title="Establecer fecha"
           borderRadius="md"
           colorScheme="cyan"
-          onPress={(e) => alert("Fecha establecida correctamente.")}
+          onPress={(e) => {
+            let formatoFecha =
+              dia + " / " + mes + " / " + anio + ", " + hora + ":" + minuto;
+            metodo(formatoFecha)
+          }}
         />
       </View>
     </SafeAreaView>
