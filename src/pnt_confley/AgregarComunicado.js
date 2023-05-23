@@ -60,9 +60,7 @@ const AgregarComunicado = () => {
   };
 
   const agregarNuevoAviso = () => {
-    console.log(estado);
-    console.log(fechaDeInicio);
-    console.log(fechaDeFinal);
+    console.log("Proceos de agregar a al bd");
   };
 
   return (
