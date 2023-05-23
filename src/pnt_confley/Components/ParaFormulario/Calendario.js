@@ -104,7 +104,8 @@ const Calendario = ({ metodo }) => {
           />
         </View>
         <Text style={styles.baseText}>
-          Fecha establecida: {dia + " / " + mes + " / " + anio + ", " + hora + ":" + minuto}
+          Fecha establecida:{" "}
+          {dia + " / " + mes + " / " + anio + ", " + hora + ":" + minuto}
         </Text>
         <Button
           title="Establecer fecha"
@@ -113,7 +114,7 @@ const Calendario = ({ metodo }) => {
           onPress={(e) => {
             let formatoFecha =
               dia + " / " + mes + " / " + anio + ", " + hora + ":" + minuto;
-            metodo(formatoFecha)
+            metodo(formatoFecha);
           }}
         />
       </View>

@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Navbar from "./Components/Navbar";
 import {
@@ -14,10 +15,8 @@ import {
   Center,
 } from "native-base";
 
-import { StyleSheet } from "react-native";
 import ImagenFormulario from "./Components/ParaFormulario/ImagenFormulario";
-import { useState } from "react";
-// import { runOnJS } from "react-native-reanimated";
+import { runOnJS } from "react-native-reanimated";
 import Calendario from "./Components/ParaFormulario/Calendario";
 
 // Todo. Variables de la pantalla (información)
@@ -26,19 +25,6 @@ const TituloApartado = "¿Qué desea publicar?";
 
 const AgregarComunicado = () => {
   // Todo. States de formulario
-  // const [urlImagen, setUrlImagen] = useState(
-  //   "https://www.w3schools.com/css/img_lights.jpg"
-  // );
-  // const [categoria, setCategoria] = useState("General");
-  // const [titulo, setTitulo] = useState("");
-  // const [descripcion, setDescripcion] = useState("");
-  // const [fechaDePublicacion, setFechaDePublicacion] = useState(new Date());
-  // const [fechaDeInicio, setFechaDeInicio] = useState("");
-  // const [fechaDeFinal, setFechaDeFinal] = useState("");
-  // const [enlaces, setEnlaces] = useState("");
-  // const [contactos, setContactos] = useState("");
-  // const [showFechaInicio, setShowFechaInicio] = useState(false);
-  // const [showFechaFinal, setShowFechaFinal] = useState(false);
 
   const [estado, setEstado] = useState({
     urlImagen: "https://www.w3schools.com/css/img_lights.jpg",
@@ -46,34 +32,37 @@ const AgregarComunicado = () => {
     titulo: "",
     descripcion: "",
     fechaDePublicacion: new Date(),
-    fechaDeInicio: "",
-    fechaDeFinal: "",
+    // fechaDeInicio: "",
+    // fechaDeFinal: "",
     enlaces: "",
-    contactos: "",
+    // contactos: "",
     showFechaInicio: false,
     showFechaFinal: false,
   });
 
+  // Estos se ponen porque hay problema con los otros
+  const [contactos, setContactos] = useState("");
+  const [fechaDeInicio, setFechaDeInicio] = useState("");
+  const [fechaDeFinal, setFechaDeFinal] = useState("");
+
   const actualizarEstado = (name, value) => {
-    setEstado({ ...estado, [name]: value });
+    -setEstado({ ...estado, [name]: value });
   };
 
   const handleFechaInicio = (nuevaFecha) => {
-    // setFechaDeInicio(nuevaFecha);
-    // setShowFechaInicio(false);
-    actualizarEstado("fechaDeInicio", nuevaFecha);
+    setFechaDeInicio(nuevaFecha);
     actualizarEstado("showFechaInicio", false);
   };
 
   const handleFechaFinal = (nuevaFecha) => {
-    // setFechaDeFinal(nuevaFecha);
-    // setShowFechaFinal(false);
-    actualizarEstado("fechaDeFinal", nuevaFecha);
+    setFechaDeFinal(nuevaFecha);
     actualizarEstado("showFechaFinal", false);
   };
 
   const agregarNuevoAviso = () => {
-    console.log("Función de agregar...");
+    console.log(estado);
+    console.log(fechaDeInicio);
+    console.log(fechaDeFinal);
   };
 
   return (
@@ -91,7 +80,7 @@ const AgregarComunicado = () => {
             {/* Imagen (vista previa) */}
             <Box>
               <FormControl.Label>Vista previa </FormControl.Label>
-              <ImagenFormulario urlImagen={estado['urlImagen']} />
+              <ImagenFormulario urlImagen={estado["urlImagen"]} />
             </Box>
 
             {/* Categoría */}
@@ -101,7 +90,7 @@ const AgregarComunicado = () => {
               <Select
                 variant="rounded"
                 placeholder="Seleccione la categoría a la que va dirigida"
-                selectedValue={estado['categoria']}
+                selectedValue={estado["categoria"]}
                 onValueChange={(itemValue) =>
                   actualizarEstado("categoria", itemValue)
                 }
@@ -135,7 +124,7 @@ const AgregarComunicado = () => {
               <FormControl.Label>Titulo </FormControl.Label>
               <Input
                 variant={"rounded"}
-                value={estado['titulo']}
+                value={estado["titulo"]}
                 onChange={(e) => actualizarEstado("titulo", e.target.value)}
               />
             </Box>
@@ -149,9 +138,9 @@ const AgregarComunicado = () => {
                 placeholder={
                   "Ingresa una descripción breve que llame la atención. "
                 }
-                value={estado['descripcion']}
+                value={estado["descripcion"]}
                 onChange={(e) =>
-                  actualizarEstado("descripcion", e.target.value)
+                  actualizarEstado("descripcion", e.nativeEvent.text)
                 }
               />
             </Box>
@@ -163,14 +152,19 @@ const AgregarComunicado = () => {
                 borderRadius="md"
                 colorScheme="blue"
                 onPress={(e) =>
-                  actualizarEstado("showFechaInicio", !estado['showFechaInicio'])
+                  actualizarEstado(
+                    "showFechaInicio",
+                    !estado["showFechaInicio"]
+                  )
                 }
               >
                 Calendario
               </Button>
-              {estado['showFechaInicio'] && <Calendario metodo={handleFechaInicio} />}
+              {estado["showFechaInicio"] && (
+                <Calendario metodo={handleFechaInicio} />
+              )}
               <FormControl.HelperText>
-                Fecha de inicio: {estado['fechaDeInicio']}
+                Fecha de inicio: {fechaDeInicio}
               </FormControl.HelperText>
               <Divider />
             </Box>
@@ -181,13 +175,17 @@ const AgregarComunicado = () => {
               <Button
                 borderRadius="md"
                 colorScheme="teal"
-                onPress={(e) => actualizarEstado('showFechaFinal', !estado['showFechaFinal'])}
+                onPress={(e) =>
+                  actualizarEstado("showFechaFinal", !estado["showFechaFinal"])
+                }
               >
                 Calendario
               </Button>
-              {estado['showFechaFinal'] && <Calendario metodo={handleFechaFinal} />}
+              {estado["showFechaFinal"] && (
+                <Calendario metodo={handleFechaFinal} />
+              )}
               <FormControl.HelperText>
-                Fecha de final: {estado['fechaDeFinal']}
+                Fecha de final: {fechaDeFinal}
               </FormControl.HelperText>
               <Divider />
             </Box>
@@ -199,8 +197,10 @@ const AgregarComunicado = () => {
                 variant={"outline"}
                 h={20}
                 placeholder={"Más información"}
-                value={estado['enlaces']}
-                onChange={(e) => actualizarEstado('enlaces', e.target.value)}
+                value={estado["enlaces"]}
+                onChange={(e) =>
+                  actualizarEstado("enlaces", e.nativeEvent.text)
+                }
               />
             </Box>
 
@@ -211,18 +211,20 @@ const AgregarComunicado = () => {
                 variant={"outline"}
                 h={20}
                 placeholder={"Pedir informes al... "}
-                value={estado['contactos']}
-                onChange={(e) => actualizarEstado('contactos', e.target.value)}
+                value={estado["contactos"]}
+                onChange={(e) =>
+                  actualizarEstado("contactos", e.nativeEvent.text)
+                }
               />
             </Box>
-{/* //! el poner el calendario ya no quiso jalar  */}
+
             {/* Btn publicar */}
             <Box pt={4}>
               <Button
                 borderRadius="md"
                 colorScheme="violet"
                 onPress={(e) => {
-                  agregarNuevoAviso()
+                  agregarNuevoAviso();
                 }}
               >
                 Publicar
