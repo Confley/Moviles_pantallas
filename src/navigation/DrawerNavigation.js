@@ -211,17 +211,20 @@ import NewScreen from "../screens/NewScreen";
 // import MenuButtonItem from "../components/MenuButtonItem"; //No sé que sea ni que haga xd
 import SobreNosotros from '../pnt_confley/SobreNosotros';
 import VisualizarAnuncios from '../pnt_confley/VisualizarAnuncios'
-import Categorias from '../pnt_ramon/Categorías'
 import AgregarComunicado from "../pnt_confley/AgregarComunicado";
 
 export default function MyDrawer() {
+  // const categoria = "Servicios escolares";
+  // const categoria = "General";
+  const categoria = "Departamento de idiomas";
+  
   return (
     <NavigationContainer>
       <NativeBaseProvider>
         <Drawer.Navigator
         // drawerContent={(props) => <CustomDrawerContent {...props} />}
         >
-          <Drawer.Screen name="Ver Anuncios" component={() => <VisualizarAnuncios categoria='General' />} />
+          <Drawer.Screen name="Ver Anuncios" component={() => <VisualizarAnuncios categoria={categoria} />} />
           <Drawer.Screen name="Nuevo Comunicado" component={AgregarComunicado} />
           <Drawer.Screen name="Sobre Nosotros" component={SobreNosotros} />
 

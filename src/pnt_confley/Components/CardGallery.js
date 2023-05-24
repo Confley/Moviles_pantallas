@@ -3,7 +3,9 @@ import { StyleSheet, ScrollView } from "react-native";
 import { Box, Text } from "native-base";
 import CustomCard from "./CustomCard";
 
+
 const CardGallery = ({ title, items }) => {
+  {console.log(items)}
   return (
     <Box style={styles.container}>
       <Text style={styles.galleryTitle}>{title}</Text>
@@ -12,13 +14,13 @@ const CardGallery = ({ title, items }) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {items.map((item, index) => (
-          <Box key={index} style={styles.cardContainer}>
+        {items.map((item) => (
+          <Box key={item.docId} style={styles.cardContainer}>
             <CustomCard
-              title={item.title}
-              description="Esta es una breve descripción de la tarjeta 1."
-              buttonText={item.buttonText}
-              onButtonClick={() => console.log("Card " + index)}
+              title={item.titulo}
+              description={item.descripcion}
+              buttonText="Saber más"
+              onButtonClick={() => console.log("Card " + item.docId)}
             />
           </Box>
         ))}

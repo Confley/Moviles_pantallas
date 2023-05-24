@@ -66,32 +66,32 @@ const VisualizarAnuncios = ({ categoria }) => {
   const Parrafo =
     "Avisos más recientes del presente mes, para todos los interesados en estar al día con la ultima información y avisos sobre nuestra institución.";
 
-  const [bd, setBd] = useState("");
-
-  async function cargarDatos(c) {
-    let bd = await getAvisos(c);
-    console.log(bd)
-    setBd(bd);
-  }
-
-  async function fetchAvisos() {
+  const [bd, setBd] = useState([]);
+  
+  async function fetchAvisos(c) {
+    console.log("Render - Lista");
     try {
-      const avisos = await getAvisos('General');
-      console.log(avisos);
+      const avisos = await getAvisos(c);
+      // console.log(avisos);
       // Acceder a los datos de cada aviso
-      avisos.forEach(aviso => {
-        console.log(aviso.id); // Imprimir el ID del aviso
-        console.log(aviso.titulo); // Imprimir el título del aviso
-        // Acceder a otros campos del aviso según tus necesidades
-      });
+      // avisos.forEach(aviso => {
+        //   console.log(aviso.id); // Imprimir el ID del aviso
+        //   console.log(aviso.titulo); // Imprimir el título del aviso
+      //   // Acceder a otros campos del aviso según tus necesidades
+      // });
+      setBd(avisos);
     } catch (error) {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+      fetchAvisos(categoria)
+  }, []);
   
   
   const handleList = (titulo, lista) => {
-    fetchAvisos();
+    console.log(lista);
     return <CardGallery title={titulo} items={lista} />;
   };
 
@@ -104,14 +104,13 @@ const VisualizarAnuncios = ({ categoria }) => {
             <Navbar titulo={TituloNavbar} />
           </SafeAreaView>
 
+          {/* //*Datos */}
           <SafeAreaView>
-            {/* //*Datos */}
             <Text style={styles.sectionTitle}>{Titulo}</Text>
             <Text style={styles.paragraph}>{Parrafo}</Text>
 
             <Divider borderColor="black" style={styles.divider} />
-            {/* <VStack>{handleList("Avisos", bd)}</VStack> */}
-            <VStack>{handleList("Avisos", items1)}</VStack>
+            <VStack>{handleList("Avisos", bd)}</VStack>
           </SafeAreaView>
         </ScrollView>
       </Box>
