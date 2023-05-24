@@ -45,6 +45,26 @@ export async function insertComunicado(aviso) {
   }
 }
 
+// export async function getAvisos(categoria) {
+//   const avisos = [];
+
+//   try {
+//     const collectionRef = collection(db, 'avisos');
+//     const q = query(collectionRef, where('categoria', '==', categoria));
+//     const querySnapshot = await getDocs(q);
+
+//     querySnapshot.forEach(doc => {
+//       const aviso = {... doc.data}; 
+//       aviso.docId = doc.id; 
+//       avisos.push(aviso)
+//     }); 
+
+//     return avisos; 
+//   } catch(error) {
+//     console.error(error);
+//   }
+// }
+
 export async function getAvisos(categoria) {
   const avisos = [];
 
@@ -54,13 +74,16 @@ export async function getAvisos(categoria) {
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach(doc => {
-      const aviso = {... doc.data}; 
-      aviso.docId = doc.id; 
-      avisos.push(aviso)
-    }); 
+      const aviso = {
+        docId: doc.id, // Obtener el ID del documento
+        ...doc.data() // Obtener los datos del documento
+      };
+      avisos.push(aviso);
+    });
 
-    return avisos; 
-  } catch(error) {
+    return avisos;
+  } catch (error) {
     console.error(error);
+    return []; // Retornar un array vacío en caso de error
   }
 }

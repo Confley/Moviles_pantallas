@@ -66,7 +66,7 @@ const VisualizarAnuncios = ({ categoria }) => {
   const Parrafo =
     "Avisos más recientes del presente mes, para todos los interesados en estar al día con la ultima información y avisos sobre nuestra institución.";
 
-  const [bd, setBd] = useState(cargarDatos(categoria));
+  const [bd, setBd] = useState("");
 
   async function cargarDatos(c) {
     let bd = await getAvisos(c);
@@ -74,7 +74,24 @@ const VisualizarAnuncios = ({ categoria }) => {
     setBd(bd);
   }
 
+  async function fetchAvisos() {
+    try {
+      const avisos = await getAvisos('General');
+      console.log(avisos);
+      // Acceder a los datos de cada aviso
+      avisos.forEach(aviso => {
+        console.log(aviso.id); // Imprimir el ID del aviso
+        console.log(aviso.titulo); // Imprimir el título del aviso
+        // Acceder a otros campos del aviso según tus necesidades
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  
   const handleList = (titulo, lista) => {
+    fetchAvisos();
     return <CardGallery title={titulo} items={lista} />;
   };
 
@@ -93,7 +110,8 @@ const VisualizarAnuncios = ({ categoria }) => {
             <Text style={styles.paragraph}>{Parrafo}</Text>
 
             <Divider borderColor="black" style={styles.divider} />
-            <VStack>{handleList("Avisos", bd)}</VStack>
+            {/* <VStack>{handleList("Avisos", bd)}</VStack> */}
+            <VStack>{handleList("Avisos", items1)}</VStack>
           </SafeAreaView>
         </ScrollView>
       </Box>
