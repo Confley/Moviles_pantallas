@@ -221,13 +221,10 @@ export default function MyDrawer() {
         <Drawer.Navigator
         // drawerContent={(props) => <CustomDrawerContent {...props} />}
         >
+          <Drawer.Screen name="Ver Anuncios" component={() => <VisualizarAnuncios categoria='General' />} />
           <Drawer.Screen name="Nuevo Comunicado" component={AgregarComunicado} />
-          
-          <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="NewScreen" component={NewScreen} />
           <Drawer.Screen name="Sobre Nosotros" component={SobreNosotros} />
-          <Drawer.Screen name="Ver Anuncios" component={VisualizarAnuncios} />
-          <Drawer.Screen name="Categorias" component={Categorias} />
+
         </Drawer.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

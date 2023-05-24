@@ -33,12 +33,6 @@ export const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export async function userExists(uid) {
-  const docRef = doc(db, "user", uid);
-  const res = await getDoc(docRef);
-  console.log("Res: " + res);
-  return res.exists;
-}
 
 export async function insertComunicado(aviso) {
   // console.log("datos: " + aviso);
@@ -47,7 +41,26 @@ export async function insertComunicado(aviso) {
     const res = await addDoc(docRef, aviso);
     return res;
   } catch (error) {
-    console.log("Error. " + error);
-    return error;
+    console.error(error);
+  }
+}
+
+export async function getAvisos(categoria) {
+  const avisos = [];
+
+  try {
+    const collectionRef = collection(db, 'avisos');
+    const q = query(collectionRef, where('categoria', '==', categoria));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach(doc => {
+      const aviso = {... doc.data}; 
+      aviso.docId = doc.id; 
+      avisos.push(aviso)
+    }); 
+
+    return avisos; 
+  } catch(error) {
+    console.error(error);
   }
 }

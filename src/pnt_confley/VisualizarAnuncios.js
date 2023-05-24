@@ -9,6 +9,12 @@ import {
 import { StyleSheet, SafeAreaView, Platform } from "react-native";
 import Navbar from "./Components/Navbar";
 import CardGallery from "./Components/CardGallery";
+import { getAvisos } from "../../database/firebase";
+import { useEffect } from "react";
+import { useState } from "react";
+
+//Todo. Datos de usuario
+const userType = "Estudiante";
 
 const items1 = [
   {
@@ -53,56 +59,20 @@ const items1 = [
   },
 ];
 
-const items = [
-  {
-    title: "Card 1",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 2",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 3",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 4",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 5",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 6",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 7",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 8",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 9",
-    buttonText: "Saber más",
-  },
-  {
-    title: "Card 10",
-    buttonText: "Saber más",
-  },
-];
-
-const bd = [items1, items];
-
-const VisualizarAnuncios = () => {
-  const TituloNavbar = "Convocatorias";
-  const Titulo = "Docentes Marzo 2023";
+const VisualizarAnuncios = ({ categoria }) => {
+  //? Titulos del componente
+  const TituloNavbar = categoria;
+  const Titulo = userType + "s Marzo 2023";
   const Parrafo =
-    "Convoca a concurso abierto a los interesados, que cubran las necesidades y requisitos de las plazas vacantes. ";
+    "Avisos más recientes del presente mes, para todos los interesados en estar al día con la ultima información y avisos sobre nuestra institución.";
+
+  const [bd, setBd] = useState(cargarDatos(categoria));
+
+  async function cargarDatos(c) {
+    let bd = await getAvisos(c);
+    console.log(bd)
+    setBd(bd);
+  }
 
   const handleList = (titulo, lista) => {
     return <CardGallery title={titulo} items={lista} />;
@@ -112,24 +82,18 @@ const VisualizarAnuncios = () => {
     <NativeBaseProvider>
       <Box flex={1} style={styles.box}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          {/* //*Navbar */}
           <SafeAreaView style={[styles.safeArea, styles.safeAreaContent]}>
             <Navbar titulo={TituloNavbar} />
           </SafeAreaView>
 
           <SafeAreaView>
+            {/* //*Datos */}
             <Text style={styles.sectionTitle}>{Titulo}</Text>
             <Text style={styles.paragraph}>{Parrafo}</Text>
+
             <Divider borderColor="black" style={styles.divider} />
-            <VStack>
-              {handleList("Ingeniería en Gestión empresarial", items)}
-              {handleList("Ingeniería en Materiales", items1)}
-              {handleList("Ingeniería en TIC's", items)}
-              {handleList("Ingeniería en Mecánica", items1)}
-              {handleList("Ingeniería en Electrónica", items)}
-              {handleList("Ingeniería en Química", items1)}
-              {handleList("Ingeniería en Sistemas", items)}
-              {handleList("Ingeniería Cívil", items1)}
-            </VStack>
+            <VStack>{handleList("Avisos", bd)}</VStack>
           </SafeAreaView>
         </ScrollView>
       </Box>
