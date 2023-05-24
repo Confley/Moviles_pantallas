@@ -214,9 +214,9 @@ import VisualizarAnuncios from '../pnt_confley/VisualizarAnuncios'
 import AgregarComunicado from "../pnt_confley/AgregarComunicado";
 
 export default function MyDrawer() {
-  // const categoria = "Servicios escolares";
+  const categoria = "Servicios escolares";
   // const categoria = "General";
-  const categoria = "Departamento de idiomas";
+  // const categoria = "Departamento de idiomas";
   
   return (
     <NavigationContainer>
