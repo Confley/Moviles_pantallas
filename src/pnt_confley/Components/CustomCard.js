@@ -33,11 +33,11 @@ const CustomCard = ({ title, description, buttonText, onButtonClick }) => {
               );
             }}
           >
-            <Popover.Content accessibilityLabel="header menu">
+            {/* <Popover.Content accessibilityLabel="header menu">
               <MenuItem>Action 1</MenuItem>
               <MenuItem>Action 2</MenuItem>
               <MenuItem>Action 3</MenuItem>
-            </Popover.Content>
+            </Popover.Content> */}
           </Popover>
         </HStack>
         <Text style={styles.cardDescription}>{description}</Text>

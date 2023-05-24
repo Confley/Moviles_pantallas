@@ -16,8 +16,9 @@ import {
 } from "native-base";
 
 import ImagenFormulario from "./Components/ParaFormulario/ImagenFormulario";
-import { runOnJS } from "react-native-reanimated";
+// import { runOnJS } from "react-native-reanimated";
 import Calendario from "./Components/ParaFormulario/Calendario";
+import { insertComunicado } from "../../database/firebase";
 
 // Todo. Variables de la pantalla (información)
 const TituloNavbar = "Publicar nuevo anuncio";
@@ -35,18 +36,18 @@ const AgregarComunicado = () => {
     // fechaDeInicio: "",
     // fechaDeFinal: "",
     enlaces: "",
-    // contactos: "",
+    contactos: "",
     showFechaInicio: false,
     showFechaFinal: false,
   });
 
   // Estos se ponen porque hay problema con los otros
-  const [contactos, setContactos] = useState("");
+  // const [contactos, setContactos] = useState("");
   const [fechaDeInicio, setFechaDeInicio] = useState("");
   const [fechaDeFinal, setFechaDeFinal] = useState("");
 
   const actualizarEstado = (name, value) => {
-    -setEstado({ ...estado, [name]: value });
+    setEstado({ ...estado, [name]: value });
   };
 
   const handleFechaInicio = (nuevaFecha) => {
@@ -59,8 +60,36 @@ const AgregarComunicado = () => {
     actualizarEstado("showFechaFinal", false);
   };
 
-  const agregarNuevoAviso = () => {
-    console.log("Proceos de agregar a al bd");
+  const agregarNuevoAviso = async () => {
+    let nuevoComunicado = {
+      userId: "0",
+      categoria: estado["categoria"],
+      titulo: estado["titulo"],
+      descripcion: estado["descripcion"],
+      fechaDePublicacion: estado["fechaDePublicacion"],
+      fechaDeInicio: fechaDeInicio,
+      fechaDeFinal: fechaDeFinal,
+      enlaces: estado["enlaces"],
+      contactos: estado["contactos"],
+    };
+
+    insertComunicado(nuevoComunicado); 
+    alert("Datos agregados");
+    handleClean();
+  };
+
+  const handleClean = () => {
+    const newValue = "";
+    actualizarEstado("categoria", newValue);
+    actualizarEstado("fechaDePublicacion", newValue);
+    actualizarEstado("enlaces", newValue);
+
+    setFechaDeInicio(newValue);
+    setFechaDeFinal(newValue);
+
+    actualizarEstado("titulo", newValue);
+    actualizarEstado("descripcion", newValue);
+    actualizarEstado("contactos", newValue);
   };
 
   return (
@@ -123,7 +152,7 @@ const AgregarComunicado = () => {
               <Input
                 variant={"rounded"}
                 value={estado["titulo"]}
-                onChange={(e) => actualizarEstado("titulo", e.target.value)}
+                onChange={(e) => actualizarEstado("titulo", e.nativeEvent.text)}
               />
             </Box>
 
