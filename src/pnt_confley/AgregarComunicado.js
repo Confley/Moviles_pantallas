@@ -20,13 +20,15 @@ import ImagenFormulario from "./Components/ParaFormulario/ImagenFormulario";
 import Calendario from "./Components/ParaFormulario/Calendario";
 import { insertComunicado } from "../../database/firebase";
 
+//! Datos del usuario 
+const USERID = 0;
+
 // Todo. Variables de la pantalla (información)
 const TituloNavbar = "Publicar nuevo anuncio";
 const TituloApartado = "¿Qué desea publicar?";
 
 const AgregarComunicado = () => {
   // Todo. States de formulario
-
   const [estado, setEstado] = useState({
     urlImagen: "https://www.w3schools.com/css/img_lights.jpg",
     categoria: "",
@@ -42,7 +44,6 @@ const AgregarComunicado = () => {
   });
 
   // Estos se ponen porque hay problema con los otros
-  // const [contactos, setContactos] = useState("");
   const [fechaDeInicio, setFechaDeInicio] = useState("");
   const [fechaDeFinal, setFechaDeFinal] = useState("");
 
@@ -62,7 +63,7 @@ const AgregarComunicado = () => {
 
   const agregarNuevoAviso = async () => {
     let nuevoComunicado = {
-      userId: "0",
+      userId: USERID,
       categoria: estado["categoria"],
       titulo: estado["titulo"],
       descripcion: estado["descripcion"],

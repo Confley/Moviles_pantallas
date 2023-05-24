@@ -41,7 +41,7 @@ export async function userExists(uid) {
 }
 
 export async function insertComunicado(aviso) {
-  console.log("datos: " + aviso);
+  // console.log("datos: " + aviso);
   try {
     const docRef = collection(db, "avisos");
     const res = await addDoc(docRef, aviso);
